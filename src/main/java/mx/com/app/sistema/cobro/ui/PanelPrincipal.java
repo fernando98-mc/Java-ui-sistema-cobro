@@ -4,6 +4,9 @@
  */
 package mx.com.app.sistema.cobro.ui;
 
+import java.awt.Image;
+import java.awt.Toolkit;    
+
 /**
  *
  * @author fernando
@@ -15,6 +18,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
      */
     public PanelPrincipal() {
         initComponents();
+       
     }
 
     /**
@@ -32,11 +36,11 @@ public class PanelPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 601, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 294, Short.MAX_VALUE)
         );
 
         pack();
