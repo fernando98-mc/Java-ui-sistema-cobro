@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package mx.com.app.sistema.de.cobro.ui;
+package mx.com.app.sistema.cobro.ui;
 
 /**
  *
- * @author Userr
+ * @author fernando
  */
 public class PanelPrincipal extends javax.swing.JFrame {
 
