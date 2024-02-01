@@ -5,7 +5,10 @@
 package mx.com.app.sistema.cobro.ui;
 
 import java.awt.Image;
-import java.awt.Toolkit;    
+import java.awt.Toolkit;
+import java.net.URL;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -16,9 +19,23 @@ public class PanelPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form PanelPrincipal
      */
+    public String autos[] = {"Coche", "Camioneta", "Moto", "Suv", "Van", "Pick up", "Crossover", "4x4", "Sedan", "Deportivo"};
+    public double precios[] = {25, 30, 15, 45, 45, 45, 40, 35, 42, 30, 30};
+    public double precio = 0;
+    public int cantidad = 0;
+
     public PanelPrincipal() {
         initComponents();
-       
+        this.setTitle("Sistema de cobro");
+        this.setLocationRelativeTo(null);
+        Image icono = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("images/autos.png"));
+        this.setIconImage(icono);
+
+        // cbo
+        DefaultComboBoxModel comboModel = new DefaultComboBoxModel(autos);
+        cblProducto.setModel(comboModel);
+
+        calcularPrecio();
     }
 
     /**
@@ -30,21 +47,209 @@ public class PanelPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblLogo = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        cblProducto = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        spnCantidad = new javax.swing.JSpinner();
+        lblPrecio = new javax.swing.JLabel();
+        lblImporte = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblProductos = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lblSubtotal = new javax.swing.JLabel();
+        lblIva = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblLogo.setBackground(new java.awt.Color(102, 102, 102));
+        lblLogo.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        lblLogo.setText("Estacionamiento");
+
+        lblTitulo.setFont(new java.awt.Font("Showcard Gothic", 3, 40)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(0, 0, 255));
+        lblTitulo.setText("Los Pokemon´s");
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel1.setText("Tipo de auto");
+
+        cblProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cblProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cblProductoActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel2.setText("Horas");
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel3.setText("Precio");
+
+        jLabel4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel4.setText("Importe");
+
+        spnCantidad.setModel(new javax.swing.SpinnerNumberModel(1, 0, 24, 1));
+        spnCantidad.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnCantidadStateChanged(evt);
+            }
+        });
+
+        lblPrecio.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblPrecio.setText("00");
+
+        lblImporte.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblImporte.setText("00");
+
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblProductos);
+
+        jLabel7.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel7.setText("Subtotal");
+
+        jLabel8.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel8.setText("IVA");
+
+        jLabel9.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel9.setText("Total");
+
+        lblSubtotal.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblSubtotal.setText("0");
+
+        lblIva.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblIva.setText("0");
+
+        lblTotal.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblTotal.setText("0");
+
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Userr\\Documents\\NetBeansProjects\\sistema-de-cobro\\src\\main\\resources\\images\\coche.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 601, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblLogo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cblProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(spnCantidad))))
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(88, 88, 88)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblImporte)
+                                    .addComponent(lblPrecio))
+                                .addGap(73, 73, 73)
+                                .addComponent(jButton1))
+                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTotal)
+                    .addComponent(lblIva)
+                    .addComponent(lblSubtotal))
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 294, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(cblProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(lblPrecio))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(spnCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblImporte)))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(lblSubtotal))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(lblIva))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(lblTotal))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cblProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cblProductoActionPerformed
+        calcularPrecio();
+    }//GEN-LAST:event_cblProductoActionPerformed
+
+    private void spnCantidadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnCantidadStateChanged
+        calcularPrecio();
+    }//GEN-LAST:event_spnCantidadStateChanged
+
+    public void calcularPrecio() {
+        precio = precios[cblProducto.getSelectedIndex()];
+        cantidad = Integer.parseInt(spnCantidad.getValue().toString());
+        lblPrecio.setText(cambioMoneda(precio));
+        lblImporte.setText(cambioMoneda(precio*cantidad));
+    }
+    
+    public String cambioMoneda(double precio){
+        return "$ " + Math.round(precio*100.0)/100.0+" MXN";
+    }
 
     /**
      * @param args the command line arguments
@@ -82,5 +287,24 @@ public class PanelPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cblProducto;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblImporte;
+    private javax.swing.JLabel lblIva;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblPrecio;
+    private javax.swing.JLabel lblSubtotal;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JSpinner spnCantidad;
+    private javax.swing.JTable tblProductos;
     // End of variables declaration//GEN-END:variables
 }
