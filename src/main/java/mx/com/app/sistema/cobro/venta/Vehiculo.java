@@ -8,15 +8,20 @@ package mx.com.app.sistema.cobro.venta;
  *
  * @author fernando
  */
-public class Venta {
+public class Vehiculo {
 
     public int id;
+
     public String descripcion;
+
     public int cantidad;
+
     public double precio;
+
     public double importe;
 
-    public Venta() {
+
+    public Vehiculo() {
 
     }
 
